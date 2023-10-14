@@ -1,8 +1,8 @@
 +++
 title = "Hello World"
 description = "Bevy + iOS + Ads = ❤️"
-date = 2023-14-10T09:19:42+00:00
-updated = 2023-27-10T09:19:42+00:00
+date = 2023-10-14T09:19:42+00:00
+updated = 2023-10-27T09:19:42+00:00
 draft = true
 template = "blog/page.html"
 
