@@ -3,11 +3,8 @@ title = "Hello World"
 description = "Bevy + iOS + Ads = ❤️"
 date = 2023-10-14T09:19:42+00:00
 updated = 2023-10-27T09:19:42+00:00
-draft = true
+draft = false
 template = "blog/page.html"
-
-[taxonomies]
-authors = ["Thierry Berger"]
 
 [extra]
 lead = "Show iOS ads using bevy!"

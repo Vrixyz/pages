@@ -1,13 +1,13 @@
 +++
-title = "Modern Documentation Theme"
+title = "Thierry Berger"
 
 
 # The homepage contents
 [extra]
-lead = 'I''m <b>Thierry Berger</b>, welcome!'
-url = "thierryberger.com"
-url_button = "Sponsor me"
-repo_version = "GitHub v0.1.0"
+lead = "I'm <b>Thierry Berger</b>, welcome!"
+url = "blog"
+url_button = "Learn"
+repo_version = ""
 repo_license = "Open-source MIT License."
 repo_url = "https://github.com/sponsors/Vrixyz"
 
@@ -17,14 +17,15 @@ section = "blog"
 url = "/blog/"
 weight = 20
 
+
 [[extra.list]]
 title = "Bevy 🚀"
-content = 'I''m helping bevy become the best engine!'
+content = "Helping bevy become the best engine!"
 url = "https://github.com/sponsors/Vrixyz"
 
 [[extra.list]]
 title = "Unity"
-content = 'I am a professional mobile gamedev using Unity'
+content = 'Professional mobile gamedev using Unity'
 url = "https://github.com/sponsors/Vrixyz"
 
 [[extra.list]]
@@ -34,7 +35,7 @@ url = "https://github.com/sponsors/Vrixyz"
 
 [[extra.list]]
 title = "Sponsor me ❤️"
-content = 'Highly technical blog posts needs highly concentrated time, sponsor me.'
+content = 'I need time to make good things!<br /> <a href="https://github.com/sponsors/Vrixyz">❤️ Sponsor me!</a>'
 url = "https://github.com/sponsors/Vrixyz"
 
 

@@ -19,11 +19,7 @@ highlight_theme = "base16-ocean-dark"
 
 [extra]
 # Put all your custom variables here
-
-[author]
-name = "Thierry Berger"
-homepage = "thierryberger.com"
-
-[original]
-author = "h-enk"
-homepage = "https://getdoks.org/"
+author = "Thierry Berger"
+github = "https://github.com/sponsors/Vrixyz"
+twitter = "https://twitter.com/Vrixyz"
+email = "dont_use_that@thierryberger.com"
