@@ -8,7 +8,7 @@ lead = "I'm <b>Thierry Berger</b>, welcome!"
 url = "blog"
 url_button = "Learn"
 repo_version = ""
-repo_license = "Open-source MIT License."
+repo_license = ""
 repo_url = "https://github.com/sponsors/Vrixyz"
 
 [[extra.menu.main]]

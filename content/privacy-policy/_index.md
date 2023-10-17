@@ -1,6 +1,6 @@
 +++
 title = "Privacy Policy"
-description = "We do not use cookies and we do not collect any personal data."
+description = "I do not use cookies and I do not collect any personal data."
 date = 2021-05-01T08:00:00+00:00
 updated = 2020-05-01T08:00:00+00:00
 draft = false
@@ -9,7 +9,7 @@ draft = false
 class = "page single"
 +++
 
-__TLDR__: We do not use cookies and we do not collect any personal data.
+__TLDR__: I do not use cookies and I do not collect any personal data.
 
 ## Website visitors
 
@@ -20,8 +20,8 @@ __TLDR__: We do not use cookies and we do not collect any personal data.
 - No information is mined and harvested for personal and behavioral trends.
 - No information is monetized.
 
-## Contact us
+## Contact me
 
-[Contact us](https://github.com/vrixyz) if you have any questions.
+[Contact me](https://github.com/vrixyz) if you have any questions.
 
 Effective Date: _14th October 2023_
