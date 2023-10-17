@@ -10,7 +10,7 @@ template = "drafts/page.html"
 lead = "Show iOS ads using <a href=https://bevyengine.org/>bevy</a>!"
 +++
 
-Thanks to [bevy examples](https://github.com/bevyengine/bevy/tree/main/examples/mobile) and [Nikl](https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/) for providing me helpful starting point!
+Thanks to [bevy examples](https://github.com/bevyengine/bevy/tree/main/examples/mobile) and [Nikl](https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/) for providing us helpful starting point!
 
 # A few prerequisites…
 
@@ -20,7 +20,7 @@ We need a computer running MacOS to compile to iOS.
 
 We will begin our journey from [Nikl's Bevy game template](https://github.com/NiklasEi/bevy_game_template/): check it out, clone it locally.
 
-[^1]: As best as I can! Help me by sending issues or PRs, words are hard!
+[^1]: As best as I can: help me by sending [issues](https://github.com/vrixyz/pages/issues) or [PRs](https://github.com/vrixyz/pages/pulls), words are hard!
 
 ## Cross compilation
 
