@@ -25,10 +25,10 @@ YET! They were able to share items, laughing and enjoying interaction in their v
 
 <details><summary>Can you picture that?</summary>
 
-If not, you can imagine a grandmother winning candies in her favorite match3 game,
-sending sweat powerups to her grandchild playing his favorite action game.
+If not, you can imagine a grandmother 👵 winning candies 🍬 in her favorite match3 game,
+sending sweat powerups to her grandchild playing his favorite action game 🔫.
 
-Very different games, but very real impact! "Thanks Grandma!"
+Very different games, but very real impact! 😘 "Thanks Grandma!"
 
 </details>
 
