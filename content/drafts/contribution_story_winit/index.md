@@ -69,7 +69,8 @@ I go big.
 # Surprise!
 
 So my plan was:
-- Input a mail/password
+- Input a mail
+- Input a password
 - Create an account or connect to it
 - Enjoy the API and relax.
 
@@ -79,15 +80,102 @@ I use bevy_egui for testing purposes (and there is no input on bevy_ui heh!)
 
 But when I try to input `@` with my keyboard, nothing appears!
 
-That's a problem.
+That's a problem, because every email address have an `@`...
 
 ## What's the root problem?
 
-[To keep it short](https://github.com/mvlabat/bevy_egui/pull/149), the problem is that winit handles altgr by sending `ctrl` + `alt`,
+[To keep it short](https://github.com/mvlabat/bevy_egui/pull/149), the problem is that winit handles <kbd>Alt-gr</kbd> by sending `ctrl` + `alt`,
 bevy_egui was ignoring all keys if ctrl was held. It makes sense, since ctrl is used as a "command" key on windows.
 
-🎉 So I fixed that, First PR in this story! 🎉
+🎉 So [I fixed that](https://github.com/mvlabat/bevy_egui/pull/149), First PR in this story! 🎉
 
 ## Again.
 
 I want to support web, but I realized my fix wasn't working on web...
+
+[I tried to fix it again](https://github.com/mvlabat/bevy_egui/pull/181) on bevy_egui, but the handling of meta key in OSX
+was proving difficult to provide an exact solution.
+
+## Adapt, overcome!
+
+OK, I spent quite some time on that issue now, I'm taking a break, keep a note somewhere and call it **The Altgr Problem**.
+
+# The **copy-paste problem**
+
+By the way, my authentication process involves a password sent to the user so he can copy it in the password field.
+
+On wasm, bevy_egui doesn't support copying from external source, the copy is only stored from and to local memory.
+That's not useful to me!
+
+## What's the root problem?
+
+[I tracked down the problem](https://github.com/mvlabat/bevy_egui/pull/178) to the [ar board crate](https://github.com/1Password/arboard), which is [not interested in supporting web](https://github.com/1Password/arboard/issues/99) because their API is fully synchronous, fair enough, let's fix it on [bevy_egui's side!](https://github.com/mvlabat/bevy_egui/pull/178)[^3]
+
+[^3]: There's probably room for a cross-platform copy paste crate, don't you think?
+
+### Down the rabbit hole
+
+Using [web-sys crate](https://rustwasm.github.io/wasm-bindgen/api/web_sys/) and a few [documentation](https://developer.mozilla.org/en-US/docs/Web/API/ClipboardEvent), I had most of the implementation ready.
+
+Most.
+
+On web MacOS, bevy_egui currently handles copy-paste with ctrl-[XCV] ; it's wrong, because it should be Meta-[XCV], But at least it's working.
+
+Now, reacting to clipboard web events fixes the inconsistency, GREAT right? I wish!
+
+I discovered yet another problem [within winit](https://github.com/mvlabat/bevy_egui/pull/178#issuecomment-1571038329):
+Meta key not correcty forwarded from winit.
+
+# Winit
+
+Thankfully, winit's folks have already detected all the shortcomings I found throughout this blog post, and a [big keyboard input refactoring](https://github.com/rust-windowing/winit/pull/2662) was almost ready.
+
+At this point, I have 3 issues related to winit, most likely fixed with winit 0.29, let's try to update!
+
+I asked around on bevy discord if anyone was working on it before rolling up my sleeves!
+
+> "Not a fun update"
+
+_François Mockers_
+
+I've been warned.
+
+## The tip of the iceberg.
+
+The first task to upgrade our winit' API usage was to rename most of the Key enums.
+As bevy provides a abstraction over winit for modularity's sake, that meant a few regex search and replace.
+
+<details><summary>my IDE helped enough I didn't have to complain much.</summary>
+
+<img src="./replace.png" alt="Raiponse singing 'I've got a dream'" />
+
+</details>
+
+## Thanks for the help
+
+Thanks to bevy maintainers and other contributors, I could ask my way through:
+- `Copy` trait issues
+- foreign types to implement bevy_reflect on top of ([SmolStr](https://github.com/bevyengine/bevy/pull/8771) 🎉)
+
+Check [my PR](https://github.com/bevyengine/bevy/pull/8745) out!
+
+## Better API (maybe, maybe not)
+
+within bevy_input, we expose 2 api to interrogate which input is on which state:
+- `Input<Key>`
+- `Input<KeyCode>`
+
+I took the opportunity to change it to a more unified
+- `Input<KeyLogic>` where `KeyLogic` is either a keycode (or scan code) or a logicalKey (key displayed on user's keyboard).
+
+To this date, I'm still not 100% sure about that, if you're up to the challenge, [please review 🙏](https://github.com/Vrixyz/bevy/pull/3).
+
+## Still ongoing
+
+I took a few controversial decisions throughout my upgrade, and that's a risk that my PR will be delayed/reworked.
+
+I'll update this blog post until this winit PR gets merged.
+
+I wrote about all that not to show how software can be broken, but how it can be fixed! Let's fix it together!
+
+[❤️ Also I'm grateful for everyone sponsoring me, enabling me to write more blog posts!  ❤️](https://github.com/sponsors/Vrixyz)
