@@ -234,15 +234,51 @@ void close_ad() {
 <!-- TODO: make sure everything is ok ; then add the code to call that from rust -->
 </details>
 
-If you run now, you should find some logs complaining about a missing Applovin SDK Key.
+We also need to be able to call Objective-C from Rust, this topic is well covered [in the rust book](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code):
+
+```rs
+extern "C" {
+    pub fn display_ad(ui_window: *mut c_void, ui_view_controller: *mut c_void);
+}
+```
+
+To get the raw window handle, it's less obvious, we need to add a new dependency: [raw-window-handle](https://crates.io/crates/raw-window-handle).
+
+It's not exactly a new dependency, it's used by winit, but accessing the raw-window-handle is considered [an unstable implementation detail](https://github.com/rust-windowing/winit/pull/3075). Make sure you use their same version: [`cargo tree -i raw-window-handle`](https://doc.rust-lang.org/cargo/commands/cargo-tree.html#tree-options) is your friend.
+
+```rs
+// ⚠️ to retrieve `.raw_window_handle()` and it's `ui_window`
+use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
+
+fn bevy_display_ad(windows: NonSend<WinitWindows>, window_query: Query<Entity, With<PrimaryWindow>>) {
+    let entity = window_query.single();
+    let raw_window = windows.get_window(entity).unwrap();
+    match raw_window.raw_window_handle() {
+        RawWindowHandle::UiKit(ios_handle) => {
+            let old_view_controller = ios_handle.ui_view_controller;
+            let ui_window: *mut c_void = ios_handle.ui_window;
+            info!("UIWindow to be passed to bridge {:?}", ui_window);
+            let result = panic::catch_unwind(|| unsafe {
+                // ⚠️ calling into Objective-C!
+                display_ad(ui_window, old_view_controller);
+            });
+            match result {
+                Ok(_) => {
+                    info!("Ad added in Bevy UIWindow successfully");
+                }
+                Err(_) => info!("Panic trying to add Ad in UIWindow"),
+            }
+        }
+        _ => info!("Unsupported window."),
+    }
+}
+```
+
+If we run now, we should find some logs complaining about a missing Applovin SDK Key.
 
 We can consider that key a secret, a strategy is to load it from an environment variable, alongside RUST_LOG.
 
-</details>
-
-<details><summary>How to input an environment variable to Xcode ?</summary>
-
-<br />
+### How to input an environment variable to Xcode ?</summary>
 
 I don't know, you tell me! <a href=https://github.com/vrixyz/pages/issues>(for real!)</a>
 
@@ -256,9 +292,9 @@ We'll want to have a way to make sure our [information](https://developer.apple.
 NSLog([[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppLovinSdkKey"]);
 ```
 
-</details>
-
 ## Think of the user!
+
+<img src="./ad_load.jpg" alt="'When it takes forever for the ads to load.', a cartoon doodle depicting a guy holding his head, with fire around." />
 
 Loading the ad when we want to display it is not optimal for user experience: it infers a loading time. We want to load it beforehand to display it instantly when needed.
 
