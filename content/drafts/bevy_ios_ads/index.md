@@ -334,7 +334,8 @@ void init_ads() {
     [ALSdk shared].settings.verboseLoggingEnabled = YES;
 
     [ALSdk shared].settings.consentFlowSettings.enabled = YES;
-    [ALSdk shared].settings.consentFlowSettings.privacyPolicyURL = [NSURL URLWithString: @"https://thierryberger.com"];
+    // ⚠️ We want our website there.
+    [ALSdk shared].settings.consentFlowSettings.privacyPolicyURL = [NSURL URLWithString: @"https://example.com"];
 
     [[ALSdk shared] initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
         // Start loading ads
@@ -346,6 +347,23 @@ void display_ad_objc() {
     [adController showAd];
 }
 ```
+
+# Consent.
+
+Ads are a complicated topic, from [espionnage](https://snyk.io/fr/blog/sourmint-malicious-code-ad-fraud-and-data-leak-in-ios/) to [kids' safety](https://www.commonsensemedia.org/articles/what-is-the-impact-of-advertising-on-kids), a handful of constraints are to be respected.
+
+## Tracking
+Apple uses [IDFA (IDentifier For Advertisers, or advertising identifier)](https://developer.apple.com/documentation/adsupport/), which you have to ask explicitly the user to get access to: Did you fill the `NSUserTrackingUsageDescription` bundle property already?
+
+Applovin provides a [built-in term flow](https://dash.applovin.com/documentation/mediation/ios/getting-started/terms-flow),
+which is helpful to quickly get a working implementation. That's what we used with `[ALSdk shared].settings.consentFlowSettings.enabled = YES;`
+
+To optimize our user retention, we want to make the best onboarding experience:
+welcoming them with a bland native popup talking about tracking isn't ideal, and Applovin was discussing [removing this built-in consent](https://github.com/AppLovin/AppLovin-MAX-SDK-iOS/issues/207).
+We're keeping it for now, but we'll discuss later™ how to customize this flow
+(init the ads after the onboarding phase, show custom consent pages)
+
+
 
 - [ ] call Rust from objective-C
 <details><summary>Main thread</summary>
