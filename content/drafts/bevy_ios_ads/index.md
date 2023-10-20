@@ -14,7 +14,7 @@ Thanks to [bevy examples](https://github.com/bevyengine/bevy/tree/main/examples/
 
 # A few prerequisites…
 
-This blog entry is aimed at intermediate Rust or iOS developers, I'll keep the wording short and accurate[^1], but heavy in helpful external links if need be.
+This blog entry is aimed at intermediate Rust or iOS developers, I'll keep the wording short and accurate[^1], but heavy in helpful external links.
 
 We need a computer running MacOS to compile to iOS.
 
@@ -298,7 +298,55 @@ NSLog([[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppLovinSdkKey"]);
 
 Loading the ad when we want to display it is not optimal for user experience: it infers a loading time. We want to load it beforehand to display it instantly when needed.
 
-- [ ] Split your API (init, show) from Rust
+We'll refactor our code to have 2 functions:
+- `init()`: handling sdk initialization + starting automatic loading of ads. 
+- `display_ad()` when we need to display an ad.
+
+```rs
+extern "C" {
+    pub fn init_ads(ui_window: *mut c_void, ui_view_controller: *mut c_void);
+    pub fn display_ad_objc();
+}
+```
+
+Our `ExampleViewController` has a major problem: inheriting from [UIVIewController](https://developer.apple.com/documentation/uikit/uiviewcontroller) ties us to logic not relevant to our use case.
+
+We'll rename it and inherit from the simpler [NSObject](https://developer.apple.com/documentation/objectivec/nsobject/).
+
+```m
+// ⚠️ From UIViewController to NSObject
+@interface AdApplovinController : NSObject<MAAdDelegate>
+{
+    // 🤐 other unchanged code
+    // ...
+    
+    - (void)showAd;
+}
+```
+
+```m
+void init_ads() {
+    adController = [[AdApplovinController alloc] init];
+    [adController createInterstitialAd];
+    [ALSdk shared].mediationProvider = @"max";
+
+    //[ALSdk shared].userIdentifier = @"USER_ID";
+    [ALSdk shared].settings.verboseLoggingEnabled = YES;
+
+    [ALSdk shared].settings.consentFlowSettings.enabled = YES;
+    [ALSdk shared].settings.consentFlowSettings.privacyPolicyURL = [NSURL URLWithString: @"https://thierryberger.com"];
+
+    [[ALSdk shared] initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
+        // Start loading ads
+        NSLog(@"initialization complete");
+    }];
+}
+
+void display_ad_objc() {
+    [adController showAd];
+}
+```
+
 - [ ] call Rust from objective-C
 <details><summary>Main thread</summary>
 
