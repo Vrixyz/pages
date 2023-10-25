@@ -50,16 +50,16 @@ I go big.
 <img src="./too-easy.jpg" alt="a guy smiling, a text writing 'too easy'." />
 </details>
 
-<details><summary>Then I make [a server](https://github.com/Vrixyz/backpack).</summary>
+<details><summary>Then I make <a href="https://github.com/Vrixyz/backpack">server</a>.</summary>
 <img src="./draw-the-rest-of-the-fucking-owl.jpg" alt="meme: draw circles, then draw an owl." />
 </details>
 
 ## Demo
 
-<details><summary>So first things first, I make a [small game](https://github.com/Vrixyz/backpack/tree/main/crates/example_game_lazy).</summary>
+<details><summary>So first things first, I make a <a href="https://github.com/Vrixyz/backpack/tree/main/crates/example_game_lazy">small game</a>.</summary>
 <img src="./too-easy.jpg" alt="a guy smiling, a text writing 'too easy'." />
 </details>
-<details><summary>Then I make a client library to connect to my server.</summary>
+<details><summary>Then I make a <a href="https://github.com/Vrixyz/backpack/tree/main/crates/client">client library</a> to connect to my server.</summary>
 <img src="./coyote-run.jpg" alt="a cartoon coyote, preparing to run." />
 </details>
 <details><summary>Then I plug things together.</summary>
