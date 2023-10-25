@@ -156,12 +156,86 @@ As bevy provides a abstraction over winit for modularity's sake, that meant a fe
 Thanks to bevy maintainers and other contributors, I could ask my way through:
 - `Copy` trait issues
 - foreign types to implement bevy_reflect on top of ([SmolStr](https://github.com/bevyengine/bevy/pull/8771) 🎉)
+- getting a confidence boost when I was in doubt ❤️
+- [minor fmt fixes](https://github.com/bevyengine/bevy/pull/10264)
 
-Check [my PR](https://github.com/bevyengine/bevy/pull/8745) out!
+## I have to tell you about...
+
+_I could start a farm with all those rabbit holes I followed..._
+
+## instant crate
+
+winit [replaced instant by web_time](https://github.com/rust-windowing/winit/pull/2836),
+I checked on the dependencies also using instant, updated what I could, and made a note on what I could not.
+`cargo tree -i` [again](http://thierryberger.com/drafts/bevy-ios-ads/#naive-implementation) my best ally.
+
+## AccessKit
+
+Of course AccessKit doesn't support winit 0.29, it's not released yet (when I started).
+
+So I [started a PR](https://github.com/AccessKit/accesskit), just enough to unblock my compilation,
+but sharing my work so it's helpful to others.
+
+When winit released, the interest seemed high, and [maintainers stepped in](https://github.com/AccessKit/accesskit/pull/256#issuecomment-1779944498).
+
+## What if we could choose not to upgrade all ecosystem?
+
+What if ecosystem crates could support every older versions of more foundation-y crates?
+
+We could upgrade to the latest ecosystem, but still have a few outdated ones!
+
+Right?
+
+Well dependencies are hard, we could leverage [rustc conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) through [cargo features](https://doc.rust-lang.org/cargo/reference/features.html) to support all edge cases...
+
+I see you shouting "UNMAINTAINABLE!".
+
+Well.
+
+winit folks [did go the "hard way"](https://github.com/rust-mobile/ndk/pull/434): they have features for `raw-window-handle` version 0.4, 0.5, 0.6 (a.k.a `rwh_04`, `rwh_05`, `rwh_06`).
+
+it's cool, because I don't have to wait on wgpu to update to latest `rwh_06`!
+
+So I chose to rely on `rwh_05`.
+
+That said, I ran a quick `cargo tree -i` to see if my dependency tree war coherent...
+and `rwh_06` was still pulled in.
+
+winit and ndk had [their default](https://github.com/rust-mobile/ndk/pull/434#issuecomment-1752089087) on `rwh_06`. I had disabled default features for those, but `android-activity` did not, so [we worked on a fix](https://github.com/rust-mobile/android-activity/pull/142) 🎉.
+
+## "AAAAAA"
+
+Everything is compiling at this point! What were we trying to achieve ?
+
+I forgot, something related to keyboard input... Let's try the keyboard example.
+
+It's working!
+
+let's try to break it:
+- Press shift
+- press 'A'
+- release shift
+- release 'a'
+
+Congratulations, I broke bevy_input. bevy_input thinks 'A' is still pressed: "Of course, you released 'a', a totally different letter!", the program told me.
+
+<details><summary>We can't have a reliable cache on characters
+if we can't have reliable events on those.</summary>
+
+And that might be an issue on resume/suspend, but that's another story.
+</details>
+
+<br />
+
+My PR is already quite big, and fixing that might involve a few experimentation and controversial changes,
+So I chose to break it out, [check it out!](https://github.com/Vrixyz/bevy/pull/3).
+
+I went for my guts, and implemented a "dynamic cache", relying on the underlying keycode,
+but keeping in memory the current logical key.
 
 ## Better API (maybe, maybe not)
 
-within bevy_input, we expose 2 api to interrogate which input is on which state:
+Within bevy_input, we expose 2 api to interrogate which input is on which state:
 - `Input<Key>`
 - `Input<KeyCode>`
 
@@ -175,6 +249,8 @@ To this date, I'm still not 100% sure about that, if you're up to the challenge,
 I took a few controversial decisions throughout my upgrade, and that's a risk that my PR will be delayed/reworked.
 
 I'll update this blog post until this winit PR gets merged.
+
+[Check my PR out!](https://github.com/bevyengine/bevy/pull/8745)
 
 I wrote about all that not to show how software can be broken, but how it can be fixed! Let's fix it together!
 
