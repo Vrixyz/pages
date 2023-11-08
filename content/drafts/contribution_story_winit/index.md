@@ -104,7 +104,7 @@ OK, I spent quite some time on that issue now, I'm taking a break, keep a note s
 
 By the way, my authentication process involves a password sent to the user so he can copy it in the password field.
 
-On wasm, bevy_egui doesn't support copying from external source, the copy is only stored from and to local memory.
+On wasm, bevy_egui doesn't support copying from external source, the copy is only stored from and to local (process) memory.
 That's not useful to me!
 
 ## What's the root problem?
@@ -145,9 +145,9 @@ I've been warned.
 The first task to upgrade our winit' API usage was to rename most of the Key enums.
 As bevy provides a abstraction over winit for modularity's sake, that meant a few regex search and replace.
 
-<details><summary>my IDE helped enough I didn't have to complain much.</summary>
+<details><summary>With good tooling the task wasn't too tedious.</summary>
 
-<img src="./replace.png" alt="Raiponse singing 'I've got a dream'" />
+<img src="./replace.png" alt="vscode replacing 47 lines with a regex replace" />
 
 </details>
 
@@ -173,10 +173,10 @@ I checked on the dependencies also using instant, updated what I could, and made
 
 Of course AccessKit doesn't support winit 0.29, it's not released yet (when I started).
 
-So I [started a PR](https://github.com/AccessKit/accesskit), just enough to unblock my compilation,
+So I [started a PR](https://github.com/AccessKit/accesskit/pull/256), just enough to unblock my compilation,
 but sharing my work so it's helpful to others.
 
-When winit released, the interest seemed high, and [maintainers stepped in](https://github.com/AccessKit/accesskit/pull/256#issuecomment-1779944498).
+When winit released, the interest seemed high, and [maintainers stepped in 🎉](https://github.com/AccessKit/accesskit/pull/256#issuecomment-1779944498).
 
 ## What if we could choose not to upgrade all ecosystem?
 
@@ -244,6 +244,29 @@ I took the opportunity to change it to a more unified
 
 To this date, I'm still not 100% sure about that, if you're up to the challenge, [please review 🙏](https://github.com/Vrixyz/bevy/pull/3).
 
+## A sizeable problem
+
+That's a pun on resizable windows, yeah.
+
+bevy (<= 0.12) had difficulties redrawing smoothly when resizing, [I made the problem worse!](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387034412)
+
+TODO: Maybe This chapter will continue...
+
+## Window out, window in
+
+Winit now supports launching a window again through run_ondemand, [bevy still has to accomodate these changes](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387056104).
+
+TODO: Maybe This chapter will continue...
+
+## Licensing
+
+Hey, open source is hard work! Licensing exists and protects everybody from users to maintainers.
+
+I encountered 2 licenses withing rust-windowing wihch bevy doesn't honour: keycodes and cursor icons.
+
+TODO: Maybe This chapter will continue...
+
+
 ## Still ongoing
 
 I took a few controversial decisions throughout my upgrade, and that's a risk that my PR will be delayed/reworked.
@@ -254,4 +277,4 @@ I'll update this blog post until this winit PR gets merged.
 
 I wrote about all that not to show how software can be broken, but how it can be fixed! Let's fix it together!
 
-[❤️ Also I'm grateful for everyone sponsoring me, enabling me to write more blog posts!  ❤️](https://github.com/sponsors/Vrixyz)
+[❤️ Also I'm grateful for my sponsors, you enable me to help you! ❤️](https://github.com/sponsors/Vrixyz)
