@@ -297,7 +297,7 @@ I hope my story helps with understanding how open source contributions come to l
 
 YES! But that post is long, I'm not faster than life[^4] so I'll consider this story done, but keep your eyes open, I'm not done with open source!
 
-[^4]: reference to rust ecosystem content creator: [fasterthanlime](https://fasterthanli.me/), known for his long deep dive articles.
+[^4]: reference to [fasterthanlime](https://fasterthanli.me/), a rustlang content creator from which I appreciate his long deep dive articles.
 
 <br />
 
