@@ -50,7 +50,7 @@ I go big.
 <img src="./too-easy.jpg" alt="a guy smiling, a text writing 'too easy'." />
 </details>
 
-<details><summary>Then I make <a href="https://github.com/Vrixyz/backpack">server</a>.</summary>
+<details><summary>Then I make a <a href="https://github.com/Vrixyz/backpack">server</a>.</summary>
 <img src="./draw-the-rest-of-the-fucking-owl.jpg" alt="meme: draw circles, then draw an owl." />
 </details>
 
@@ -233,7 +233,7 @@ So I chose to break it out, [check it out!](https://github.com/Vrixyz/bevy/pull/
 I went for my guts, and implemented a "dynamic cache", relying on the underlying keycode,
 but keeping in memory the current logical key.
 
-## Better API (maybe, maybe not)
+## Better API ?
 
 Within bevy_input, we expose 2 api to interrogate which input is on which state:
 - `Input<Key>`
@@ -242,39 +242,63 @@ Within bevy_input, we expose 2 api to interrogate which input is on which state:
 I took the opportunity to change it to a more unified
 - `Input<KeyLogic>` where `KeyLogic` is either a keycode (or scan code) or a logicalKey (key displayed on user's keyboard).
 
-To this date, I'm still not 100% sure about that, if you're up to the challenge, [please review 🙏](https://github.com/Vrixyz/bevy/pull/3).
+This approach was quite controversial as it adds up maintainance burden, and most likely performance implication.
+
+I raised my concerns on the Pull Request and on discord. After a few discussions, we dropped altogether adressing the "AAAAAA" problem, by mapping KeyCode to the PhysicalKey (place on your keyboard) rather than the LogicalKey (visible key on your keyboard), that's been actually wanted for a long time.
+
+Hopefully when time comes, we'll find elegant solution to display to the user the visible key to hit in order to trigger an action.
+It's possible to retrieve a Physical/Logical key mapping on most platforms, but might be a security risk on web [due to fingerprinting](https://github.com/WICG/keyboard-map/issues/30), it's not an "easy" topic!
 
 ## A sizeable problem
 
 That's a pun on resizable windows, yeah.
 
-bevy (<= 0.12) had difficulties redrawing smoothly when resizing, [I made the problem worse!](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387034412)
+bevy (<= 0.12) had difficulties redrawing smoothly when resizing, [I made the problem worse!](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387034412) I couldn't reproduce on winit, so it might be fixable on bevy's side ? Come help ♥
 
-TODO: Maybe This chapter will continue...
+Thanks to early testers, we noticed I also broke web, a continuous back and forth concerning window logical and physical size was going on between wgpu and winit; thankfully I got [help from winit's insider](https://github.com/bevyengine/bevy/pull/10702/files#r1420567168)!
 
 ## Window out, window in
 
 Winit now supports launching a window again through run_ondemand, [bevy still has to accomodate these changes](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387056104).
 
-TODO: Maybe This chapter will continue...
+Be careful to your scope when making a contribution! My objective was to update to latext winit. I took the Shortest path, new features will come next if possible.
 
 ## Licensing
 
 Hey, open source is hard work! Licensing exists and protects everybody from users to maintainers.
 
-I encountered 2 licenses withing rust-windowing wihch bevy doesn't honour: keycodes and cursor icons.
+![black and white image of a guy wearing glasses, reading a big book](lawyer.png)
 
-TODO: Maybe This chapter will continue...
+I encountered 2 licenses withing rust-windowing which bevy doesn't honour: keycodes and cursor icons.
 
+I copied the licences and called it a day. We're adding a tiny bit of modification to winit's code by adding a reflection capability through derives, so technically we should probably disclose that, but I'm not a lawyer.
 
-## Still ongoing
+## Green Tests!
 
-I took a few controversial decisions throughout my upgrade, and that's a risk that my PR will be delayed/reworked.
+Once everything was aligned, one last thing bit us: I did not notice duplicate dependency on raw-window-handle was explicitly forbidden in our [deny.toml](https://github.com/EmbarkStudios/cargo-deny), again the community [joined efforts](https://github.com/AccessKit/accesskit/pull/319) to [unblock everything](https://github.com/rust-mobile/android-activity/pull/149)!
 
-I'll update this blog post until this winit PR gets merged.
+Bevy continous tests are quite complete with different platforms, unit tests + example runs with screenshot, it's worth an article on its own.
 
-[Check my PR out!](https://github.com/bevyengine/bevy/pull/8745)
+While it gave me enough confidence in attempting such an impactful task, it's not replacing manual testing, as it wouldn't have spotted: differences in resizing behaviour, web crashing after a few frames, android compilation... But it's still continuously improving, and not at all in a bad state, game engine really are a beast to test.
 
-I wrote about all that not to show how software can be broken, but how it can be fixed! Let's fix it together!
+## "Done"
 
-[❤️ Also I'm grateful for my sponsors, you enable me to help you! ❤️](https://github.com/sponsors/Vrixyz)
+[It's merged now!](https://github.com/bevyengine/bevy/pull/10702)
+
+From June to december 2023, that was quite a Journey!
+
+But are we ever "done" ?
+
+There's a good list of [follow up items](https://github.com/bevyengine/bevy/issues/11052), drop a comment if you want to help!
+
+I hope my story helps with understanding how open source contributions come to life, I look forward to your help ! 😉
+
+"But didn't you want to copy paste or input '@'? How does that solve anything? What about **The Altgr Problem**?"
+
+YES! But that post is long, I'm not faster than life[^4] so I'll consider this story done, but keep your eyes open, I'm not done with open source!
+
+[^4]: reference to rust ecosystem content creator: [fasterthanlime](https://fasterthanli.me/), known for his long deep dive articles.
+
+<br />
+
+[❤️ Want more? Consider sponsoring me! ❤️](https://github.com/sponsors/Vrixyz)
