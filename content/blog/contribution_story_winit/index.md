@@ -1,8 +1,8 @@
 +++
 title = "Contribution Story"
 description = "Follow me in a deep contribution story."
-date = 2023-10-14T09:19:42+00:00
-updated = 2023-10-25T09:19:42+00:00
+date = 2023-12-22T09:19:42+00:00
+updated = 2023-12-22T09:19:42+00:00
 draft = false
 template = "drafts/page.html"
 dream = "dream-tangled.gif"
