@@ -261,7 +261,7 @@ Thanks to early testers, we noticed I also broke web, a continuous back and fort
 
 Winit now supports launching a window again through run_ondemand, [bevy still has to accomodate these changes](https://github.com/bevyengine/bevy/pull/8745#discussion_r1387056104).
 
-Be careful to your scope when making a contribution! My objective was to update to latext winit. I took the Shortest path, new features will come next if possible.
+Be careful with your scope when making a contribution! My objective was to update to latext winit. I took the Shortest path, new features will come next if possible.
 
 ## Licensing
 
