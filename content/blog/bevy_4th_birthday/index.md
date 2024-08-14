@@ -33,7 +33,7 @@ Why do I care about bugs and teaching ?
 
 ## More about me...
 
-I’m glad you asked! I believe so much in Rust (and bevy) that I did quit my unity gamedev job earlier this year to hop of the bevy train.
+I’m glad you asked! I believe so much in Rust (and bevy) that I did quit my unity gamedev job earlier this year to hop on the bevy train.
 
 Special thanks to the fellow tech enthusiasts who listened to [my](https://www.youtube.com/watch?v=pzVMvTHspPw&list=PLbvvWoCXmXkJHyozyLtWo83Y9B-6qqs0B&index=3&t=1s) few [talks](https://ftp.belnet.be/mirror/FOSDEM/video/2024/h2215/fosdem-2024-1776-journey-to-an-open-source-contribution.av1.webm) about bevy [ecosystem](https://www.linkedin.com/posts/thierry-berger-614aa79a_rust-activity-7207465947945676800-xeeR?utm_source=share&utm_medium=member_desktop), you empowered me.
 
@@ -68,7 +68,7 @@ Where you can build a game « naïvely » in Unity or Godot, without knowing e
 So my wish for next bevy year, is to improve the « naïve » proofness of bevy: 
 
 - reduce surprises: add tests, documentation, listen to and act on user experiences
-- ensuring tools work and help each other: bevy mod system dump is one of my personal favorite, that I wish all projects would include. Mockersf initiative of screenshot comparison is another great example of tooling which most projects would benefit from.
+- ensuring tools work and help each other: bevy mod system dump is one of my personal favorite, that I wish all projects would include. [Mockersf initiative](https://www.youtube.com/watch?v=BwZGbZQdpec) of screenshot comparison ([Pixel Eagle](https://pixel-eagle.vleue.com/)) is another great example of tooling which most projects would benefit from.
 - Crates compatibility: [avian collider creation](https://github.com/Jondolf/avian/pull/326) ; nalgebra compatiblity with glam...
 - Everything developer experience, which must now trickle down (up ?) to project-team experience, in order to make bevy take its flight.
   - Let's not settle only for Developer eXperience (DX), let's popularize the term Team eXperience (TX),
