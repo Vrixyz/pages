@@ -16,7 +16,7 @@ This post is an answer to [bevy's birthday post](https://bevyengine.org/news/bev
 
 I’ve been involved in mobile development for ~10 years, most of the time in the gaming industry, and since discovering Rust in 2015 and bevy 4 years ago, I’m convinced this enbody the future of game development I want to be part of.
 
-Now, yes, bevy is not mature yet, I’m maintaining a [curated list of bevy projects in production](https://github.com/Vrixyz/bevy_awesome_prod), and while I’m very excited to see it grow, and wish them success with all my heart, the « execution level » is (mostly) not yet comparable to the existing giants of the gamedev ecosystem.
+Now, yes, bevy is not mature yet, I’m maintaining a [curated list of bevy projects in production](https://github.com/ThierryBerger/bevy_awesome_prod), and while I’m very excited to see it grow, and wish them success with all my heart, the « execution level » is (mostly) not yet comparable to the existing giants of the gamedev ecosystem.
 
 But that’s to be expected: most projects are made with limited resources, Rust is young in gamedev, and bevy is still a "baby".
 
@@ -83,4 +83,4 @@ I'm proud of having led the effort for a CI test for [conflicting systems orderi
 <br />
 <br />
 
-[I have a sponsor page ❤️](https://github.com/sponsors/Vrixyz)
+[I have a sponsor page ❤️](https://github.com/sponsors/ThierryBerger)

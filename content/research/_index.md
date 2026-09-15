@@ -20,3 +20,11 @@ Interactive tools and simulations.
 Simulation tool for a **Holding SAS + 2 EURL** structure: models dividend flows, corporate tax, TNS contributions, and net compensation across different scenarios.
 
 <a href="/research/company/" class="btn btn-primary">Open simulation →</a>
+
+---
+
+### Playables
+
+Playable ads &amp; micro-demos — bite-sized prototypes that showcase a game's core loop in seconds.
+
+<a href="/playables/" class="btn btn-primary">Browse playables →</a>

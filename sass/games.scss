@@ -1,4 +1,7 @@
 /* Game cards grid */
+$accent: #23a0df;
+$accent-soft: #349dd2;
+
 .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -7,18 +10,18 @@
 
 .game-card {
     overflow: hidden;
-    border: 1px solid rgba(138, 43, 226, 0.15);
+    border: 1px solid rgba($accent, 0.15);
     border-radius: 10px;
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
-    background: rgba(138, 43, 226, 0.03);
+    background: rgba($accent, 0.03);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(138, 43, 226, 0.15);
+        box-shadow: 0 6px 20px rgba($accent, 0.15);
     }
 }
 
@@ -42,7 +45,7 @@
     justify-content: center;
     text-align: center;
     padding: 1rem;
-    background: linear-gradient(135deg, #74619f, #8a2be2);
+    background: linear-gradient(135deg, $accent-soft, $accent);
     color: #fff;
 
     .playable-genre-label {
@@ -90,7 +93,7 @@
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    background: linear-gradient(135deg, #74619f, #8a2be2);
+    background: linear-gradient(135deg, $accent-soft, $accent);
 
     &.btn-game-green {
         background: linear-gradient(135deg, #55926b, #4fbc55);

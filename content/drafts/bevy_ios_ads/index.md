@@ -20,7 +20,7 @@ We need a computer running MacOS to compile to iOS.
 
 We will begin our journey from [Nikl's Bevy game template](https://github.com/NiklasEi/bevy_game_template/): check it out, clone it locally.
 
-[^1]: As best as I can: help me by sending [issues](https://github.com/vrixyz/pages/issues) or [PRs](https://github.com/vrixyz/pages/pulls), words are hard!
+[^1]: As best as I can: help me by sending [issues](https://github.com/ThierryBerger/pages/issues) or [PRs](https://github.com/ThierryBerger/pages/pulls), words are hard!
 
 ## Cross compilation
 
@@ -47,7 +47,7 @@ This time it should at least build a xcodeproj.
 
 It's okay, we went through a lot of technical details already!
 
-Take time to read though the links then <a href=https://github.com/vrixyz/pages/issues>send me an issue</a> if you're lost!
+Take time to read though the links then <a href=https://github.com/ThierryBerger/pages/issues>send me an issue</a> if you're lost!
 </details>
 
 <br />
@@ -280,7 +280,7 @@ We can consider that key a secret, a strategy is to load it from an environment 
 
 ### How to input an environment variable to Xcode ?</summary>
 
-I don't know, you tell me! <a href=https://github.com/vrixyz/pages/issues>(for real!)</a>
+I don't know, you tell me! <a href=https://github.com/ThierryBerger/pages/issues>(for real!)</a>
 
 But let's find something else, we can leverage <a href=https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project>build configuration files</a> which we will keep secret.
 

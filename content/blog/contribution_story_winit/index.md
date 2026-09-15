@@ -50,16 +50,16 @@ I go big.
 <img src="./too-easy.jpg" alt="a guy smiling, a text writing 'too easy'." />
 </details>
 
-<details><summary>Then I make a <a href="https://github.com/Vrixyz/backpack">server</a>.</summary>
+<details><summary>Then I make a <a href="https://github.com/ThierryBerger/backpack">server</a>.</summary>
 <img src="./draw-the-rest-of-the-fucking-owl.jpg" alt="meme: draw circles, then draw an owl." />
 </details>
 
 ## Demo
 
-<details><summary>So first things first, I make a <a href="https://github.com/Vrixyz/backpack/tree/main/crates/example_game_lazy">small game</a>.</summary>
+<details><summary>So first things first, I make a <a href="https://github.com/ThierryBerger/backpack/tree/main/crates/example_game_lazy">small game</a>.</summary>
 <img src="./too-easy.jpg" alt="a guy smiling, a text writing 'too easy'." />
 </details>
-<details><summary>Then I make a <a href="https://github.com/Vrixyz/backpack/tree/main/crates/client">client library</a> to connect to my server.</summary>
+<details><summary>Then I make a <a href="https://github.com/ThierryBerger/backpack/tree/main/crates/client">client library</a> to connect to my server.</summary>
 <img src="./coyote-run.jpg" alt="a cartoon coyote, preparing to run." />
 </details>
 <details><summary>Then I plug things together.</summary>
@@ -228,7 +228,7 @@ And that might be an issue on resume/suspend, but that's another story.
 <br />
 
 My PR is already quite big, and fixing that might involve a few experimentation and controversial changes,
-So I chose to break it out, [check it out!](https://github.com/Vrixyz/bevy/pull/3).
+So I chose to break it out, [check it out!](https://github.com/ThierryBerger/bevy/pull/3).
 
 I went for my guts, and implemented a "dynamic cache", relying on the underlying keycode,
 but keeping in memory the current logical key.
@@ -301,4 +301,4 @@ YES! But that post is long, I'm not faster than life[^4] so I'll consider this s
 
 <br />
 
-[❤️ Want more? Consider sponsoring me! ❤️](https://github.com/sponsors/Vrixyz)
+[❤️ Want more? Consider sponsoring me! ❤️](https://github.com/sponsors/ThierryBerger)

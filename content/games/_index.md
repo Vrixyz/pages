@@ -28,7 +28,7 @@ Handcrafted browser games — no downloads, no installs. Just click and play.
       <li>Pick-up-and-play — no account needed</li>
       <li>Built with Phaser</li>
     </ul>
-    <a href="/games/hole2d/" class="btn btn-primary btn-game">
+    <a href="/games/hole2d/" class="btn btn-primary btn-game btn-game-purple">
       Play Hole2D
     </a>
   </div>
@@ -48,7 +48,7 @@ Handcrafted browser games — no downloads, no installs. Just click and play.
       <li>Pick-up-and-play — no account needed</li>
       <li>Built with ThreeJS</li>
     </ul>
-    <a href="/games/hole3d/" class="btn btn-primary btn-game">
+    <a href="/games/hole3d/" class="btn btn-primary btn-game btn-game-purple">
       Play Hole3D
     </a>
   </div>

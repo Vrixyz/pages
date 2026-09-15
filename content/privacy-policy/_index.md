@@ -20,6 +20,6 @@ __TLDR__: I do not use cookies and I do not collect any personal data.
 
 ## Contact me
 
-[Contact me](https://github.com/vrixyz) if you have any questions.
+[Contact me](https://github.com/ThierryBerger) if you have any questions.
 
 Effective Date: _14th October 2023_
